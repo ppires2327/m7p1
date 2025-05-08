@@ -4,7 +4,7 @@ from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad
 
-HOST = '68.221.132.42'  # Substitua pelo IP do servidor
+HOST = '108.143.76.125'  # Substitua pelo IP do servidor
 PORT = 5000
 ARQUIVO_ENTRADA = 'exemplo.pdf' # Substitua pelo seu arquivo PDF
 Pass_correta = "upskill"

@@ -1,4 +1,6 @@
 import socket
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
 
 HOST = '0.0.0.0'  # Escuta em todas as interfaces
 PORT = 5000
