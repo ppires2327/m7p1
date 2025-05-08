@@ -16,3 +16,6 @@ if Pass_introduzida == Pass_correta:
             cliente.sendall(dados)
 
     print(f"Arquivo '{ARQUIVO_ENTRADA}' enviado com sucesso.")
+else:
+    print("A palavra-passe que inseriu está incorreta.")
+    exit()
