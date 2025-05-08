@@ -23,9 +23,13 @@ while True:
         with conexao:
     
             print(f"Conectado por {endereco}")
-    
+
+            aes_key = conexao.recv(16)  # 16 bytes for AES-128 key
+            print("Chave AES recebida.")
+
             with open(ARQUIVO_SAIDA, 'wb') as f:
-    
+                encrypted_data = b''
+
                 while True:
     
                     dados = conexao.recv(4096)
@@ -33,9 +37,12 @@ while True:
                     if not dados:
     
                         break
+                    encrypted_data += dados
     
                     f.write(dados)
+                
+                cipher = AES.new(aes_key, AES.MODE_ECB)
+                decrypted_data = unpad(cipher.decrypt(encrypted_data), AES.block_size)
+                f.write(decrypted_data)
 
-
-    
-            print(f"Arquivo salvo como {ARQUIVO_SAIDA}")
+            print(f"Arquivo guardado como {ARQUIVO_SAIDA} e desencriptado")
