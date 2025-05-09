@@ -41,10 +41,11 @@ while True:
                         break
                     encrypted_data += dados
     
-                    f.write(dados)
                 
                 cipher = AES.new(aes_key, AES.MODE_ECB)
                 decrypted_data = unpad(cipher.decrypt(encrypted_data), AES.block_size)
-                f.write(decrypted_data)
+
+                with open(ARQUIVO_SAIDA, 'wb') as f:
+                    f.write(decrypted_data)
 
             print(f"Arquivo guardado como {ARQUIVO_SAIDA} e desencriptado")
