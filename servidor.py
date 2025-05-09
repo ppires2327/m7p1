@@ -5,6 +5,7 @@ from Crypto.Util.Padding import pad, unpad
 HOST = '0.0.0.0'  # Escuta em todas as interfaces
 PORT = 5000
 ARQUIVO_SAIDA = 'recebido.pdf'
+Pass_correta = "upskill"
 
 # AF_INET stands for Address Family: Internet. Serve para usar ipv4
 # SOCK_STREAM tells the socket to use TCP (Transmission Control Protocol).
@@ -25,6 +26,15 @@ while True:
         with conexao:
     
             print(f"Conectado por {endereco}")
+
+            senha_recebida = conexao.recv(1024).decode('utf-8')
+            if senha_recebida != Pass_correta:
+                print("Senha incorreta. Conexão encerrada.")
+                conexao.sendall(b"Senha incorreta! A conexao sera encerrada")
+                conexao.close()
+                continue
+            
+            conexao.sendall(b"Senha correta. Transferindo arquivo.")
 
             aes_key = conexao.recv(16)  # 16 bytes for AES-128 key
             print("Chave AES recebida.")
